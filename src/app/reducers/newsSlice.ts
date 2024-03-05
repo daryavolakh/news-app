@@ -12,7 +12,7 @@ interface NewsState {
 const initialState: NewsState = {
   loading: false,
   error: null,
-  category: 'General',
+  category: 'general',
   articles: []
 };
 

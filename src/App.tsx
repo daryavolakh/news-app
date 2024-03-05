@@ -2,9 +2,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import News from './components/News/News'
 import Search from './components/Search/Search'
+import "./assets/global.scss"
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>

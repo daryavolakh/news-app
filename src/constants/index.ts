@@ -8,14 +8,20 @@ export const guardianAPIUrl =
 '?api-key=28b78e5a-c66e-4092-9081-a55e8d56c418';
 
 export const timesAPIUrl = 
-  'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election' +
+  'https://api.nytimes.com/svc/search/v2/articlesearch.json?' +
   '&api-key=rBW1zsAS5zqrLF6wpry1WHefkdqplE7u';
 
 export interface Article {
-  title: string,
-  publishedAt: string,
+  title?: string,
+  webTitle?: string,
+  abstract?: string,
+  publishedAt?: string,
+  webPublicationDate?: string,
+  pub_date?: string,
   description?: string,
+  lead_paragraph?: string,
   author?: string,
+  urlToImage?: string,
 }
 
 export interface FormDate {
@@ -36,4 +42,6 @@ export enum CATEGORIES {
   science = 'Science',
   sports = 'Sports',
   technology = 'Technology',
+  world = "World news",
+  politics = "Politics"
 };

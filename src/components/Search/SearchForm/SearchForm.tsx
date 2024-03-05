@@ -1,3 +1,5 @@
+import "./SearchForm.scss";
+
 interface SearchFormProps {
   setKeyword: (keyword: string) => void
 }
@@ -17,13 +19,17 @@ export default function SearchForm ({ setKeyword } : SearchFormProps) {
   }
 
   return (
-    <form onSubmit={handleSearch}>
-      <fieldset>
-        <legend>Search form!</legend>
-        <div>
-          <input type="text" id="keyword" placeholder="Enter keyword" />
+    <form onSubmit={handleSearch} className="SearchForm">
+      <fieldset className="SearchForm__fieldset">
+        <legend>Search</legend>
+        <div className="SearchForm__input-block">
+          <input 
+            type="text" 
+            id="keyword"
+            placeholder="Enter keyword"
+            className="SearchForm__input" />
         </div>
-        <button type="submit">Search</button>
+        <button type="submit" className="SearchForm__button">Search</button>
       </fieldset>
     </form>
   )

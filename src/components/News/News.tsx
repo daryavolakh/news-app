@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import NewsFeed from "./NewsFeed/NewsFeed";
 import NewsFeedSettings from "./NewsFeedSettings/NewsFeedSettings";
 import { useDispatch, useSelector } from "react-redux"
 import { fetchNewsFailure, fetchNewsStart, fetchNewsSuccess, setNewsCategory, selectNewsArticles, selectNewsCategory, selectNewsError, selectNewsLoading } from "../../app/reducers/newsSlice";
 import { newsAPIUrl, guardianAPIUrl, timesAPIUrl } from "../../constants";
+import './News.scss';
+import { fetchData } from "../../utils/fetchData";
 
 export default function News() {
   const dispatch = useDispatch();
@@ -18,34 +20,35 @@ export default function News() {
     }
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getArticles = async () => {
       dispatch(fetchNewsStart());
 
       try {
-        let url = newsAPIUrl;
+        let urlNewsAPI = newsAPIUrl,
+        urlGuardianAPI = guardianAPIUrl,
+        urlTimesAPI = timesAPIUrl;
+
         if(category) {
-          url += `&category=${category}`;
-        }
-        const response = await fetch(url);
-
-        if(!response.ok) {
-          throw new Error('Failed to fetch news.');
+          urlNewsAPI += `&category=${category}`;
+          urlGuardianAPI += `&section=${category}`;
+          urlTimesAPI += `&q=${category}`;
         }
 
-        const data = await response.json();
-        dispatch(fetchNewsSuccess(data.articles)); // data.articles, data.response.results, data.response.docs
+        const data = await fetchData(urlNewsAPI, urlGuardianAPI, urlTimesAPI);
+        dispatch(fetchNewsSuccess(data));
       } catch (error: any) {
         dispatch(fetchNewsFailure(error.message)); 
       }
     };
 
-    fetchData();
+    getArticles();
   }, [dispatch, category]);
 
   return (
-    <>
+    <div className="News">
+      <h1 className="News__title">Personalized News Feed</h1>
       <NewsFeedSettings selectedCategory={category} setCategory={setCategory} />
       <NewsFeed articles={articles} loading={loading} error={error} />
-    </>
+    </div>
   );
 }

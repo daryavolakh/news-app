@@ -1,0 +1,28 @@
+@import "../../assets/variables.scss";
+@import "../../assets/mixins.scss";
+
+.Search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 35px;
+
+    @include parent-paddings;
+
+    &__title {
+        @include page-title;
+    }
+
+    &__panel {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        column-gap: 50px;
+
+        @media(width <= $media-m) {
+            flex-direction: column;
+            align-items: center;
+            row-gap: 20px;
+        }
+    }
+}

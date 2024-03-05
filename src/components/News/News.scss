@@ -1,0 +1,15 @@
+@import "../../assets/variables.scss";
+@import "../../assets/mixins.scss";
+
+.News {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 35px;
+
+    @include parent-paddings;
+
+    &__title {
+        @include page-title;
+    }
+}

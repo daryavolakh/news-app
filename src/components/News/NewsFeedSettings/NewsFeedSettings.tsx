@@ -1,5 +1,6 @@
 
 import { CATEGORIES } from "../../../constants";
+import './NewsFeedSettigs.scss';
 
 interface NewsFeedSettingsProps {
   selectedCategory: string,
@@ -13,17 +14,23 @@ export default function NewsFeedSettings ({ selectedCategory, setCategory } : Ne
   }
 
   return (
-    <>
-      <h2>NewsFeedSettings</h2>
-      <h3>Filters by</h3>
-      <label>Category: </label>
-      <select value={selectedCategory} onChange={handleAuthorChange}>
-        {Object.values(CATEGORIES).map((category) => (
-          <option key={category}>
-            {category}
-          </option>
-        ))}
-      </select>
-     </>
+    <form className="NewsFeedSettings">
+      <fieldset className="NewsFeedSettings__fieldset">
+        <legend className="NewsFeedSettings__title">Prefferable settings</legend>
+        <div className="NewsFeedSettings__input-block">
+          <label className="NewsFeedSettings__label">Category</label>
+          <select
+            className="NewsFeedSettings__select"
+            value={selectedCategory}
+            onChange={handleAuthorChange}>
+            {Object.entries(CATEGORIES).map(([key, value]) => (
+              <option key={key} value={key}>
+                {value}
+              </option>
+            ))}
+          </select>
+        </div>
+      </fieldset>
+    </form>
   )
 }

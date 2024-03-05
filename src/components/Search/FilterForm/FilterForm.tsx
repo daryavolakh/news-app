@@ -1,5 +1,6 @@
-import { useEffect } from "react";
 import { Filters, CATEGORIES } from "../../../constants";
+import { formatDate } from "../../../utils/formatDate";
+import "./FilterForm.scss";
 
 interface FilterFormProps {
   filters: Filters,
@@ -7,11 +8,6 @@ interface FilterFormProps {
 }
 
 export default function FilterForm ({ filters, setFilters } : FilterFormProps) {
-  const formatDate = (value: string) => {
-    const selectedDate = new Date(value);
-    return selectedDate.toISOString();
-  }
-
   const handleCategoryChange = (value: string) => {
     setFilters({
       ...filters,
@@ -24,20 +20,35 @@ export default function FilterForm ({ filters, setFilters } : FilterFormProps) {
       ...filters,
       date: {
         ...filters.date,
-        [field]: formatDate(value)
+        [field]: value ? formatDate(value) : ''
       }
     });
   }
 
+  const handleClear = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    setFilters({
+      category: '',
+      date: {
+        from: '',
+        to: ''
+      }
+    });
+  }
+
+  const isClearDisabled = !filters.category && !filters.date.from && !filters.date.to;
+
   return (
-    <form>
-      <fieldset>
-        <legend>Filter: </legend>
-        <div>
-          <label>Category</label>
+    <form className="FilterForm">
+      <fieldset className="FilterForm__fieldset">
+        <legend className="FilterForm__legend">Filter by</legend>
+        <div className="FilterForm__input-block">
+          <label className="FilterForm__label">Category</label>
           <select 
             name="category"
             id="category"
+            className="FilterForm__select"
             value={filters.category}
             onChange={(e) => handleCategoryChange(e.target.value)}>
             {Object.values(CATEGORIES).map(
@@ -45,21 +56,32 @@ export default function FilterForm ({ filters, setFilters } : FilterFormProps) {
             )}
           </select>
         </div>
-        <div>
-          <label>From</label>
-          <input 
-            type="date"
-            onChange={(e) => handleDateChange("from", e.target.value)}
-          />
+        <div className="FilterForm__date">
+          <div className="FilterForm__input-block">
+            <label className="FilterForm__label">From</label>
+            <input 
+              type="date"
+              value={filters.date.from}
+              className="FilterForm__input"
+              onChange={(e) => handleDateChange("from", e.target.value)}
+            />
+          </div>
+          <div className="FilterForm__input-block">
+            <label className="FilterForm__label">To</label>
+            <input 
+              type="date"
+              value={filters.date.to}
+              className="FilterForm__input"
+              onChange={(e) => handleDateChange("to", e.target.value)}
+            />
+          </div>
+          <p className="FilterForm__note">*Articles are only available for the last month from the current date.</p>
         </div>
-        <div>
-          <label>To</label>
-          <input 
-            type="date"
-            onChange={(e) => handleDateChange("to", e.target.value)}
-          />
-        </div>
-        <p>*Articles only available from 2024-02-01</p>
+        <button
+        type="button"
+        className="FilterForm__clear"
+        onClick={handleClear}
+        disabled={isClearDisabled}>Clear all</button>
       </fieldset>
     </form>
   )
