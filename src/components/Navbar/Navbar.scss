@@ -1,0 +1,39 @@
+@import "../../assets/variables.scss";
+
+.Navbar {
+  width: 100%;
+  background: $dark-beige;
+  border-bottom: $border;
+  box-sizing: border-box;
+  padding: 15px 20px;
+  margin-bottom: 50px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__item {
+    font-size: 16px;
+    color: $blue;
+
+    a {
+      color: inherit;
+      text-decoration: unset;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: 0.1s;
+
+      &:hover {
+        color: $pink;
+      }
+    }
+  }
+}

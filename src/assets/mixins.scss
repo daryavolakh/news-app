@@ -1,0 +1,71 @@
+@import "./variables.scss";
+
+@mixin parent-paddings {
+    padding: 0 50px 50px;
+
+    @media(width <= $media-m) {
+        row-gap: 30px;
+        padding: 0 20px 20px;
+    }
+}
+
+@mixin page-title {
+    font-size: 24px;
+    text-transform: uppercase;
+    text-align: center;
+    color: $pink;
+    margin: 0;
+
+    @media(width <= $media-m) {
+        font-size: 21px;
+    }
+}
+
+@mixin fieldset {
+    border-radius: 10px;
+}
+
+@mixin input-block {
+    &__input-block {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        row-gap: 5px;
+    }
+
+    &__label {
+        font-size: 16px;
+        background: unset;
+    }
+
+    &__select {
+        color: $blue;
+        border-color: $blue;
+        border-radius: 20px;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    &__input {
+        color: $blue;
+        border-width: 1px;
+        border-color: $blue;
+        border-radius: 10px;
+        padding: 5px;
+    }
+}
+
+@mixin link {
+    color: $pink;
+    text-decoration: unset;
+    background: $beige;
+    border-radius: 10px;
+    border: $border;
+    padding: 5px 10px;
+    transition: 0.1s;
+
+    &:hover {
+        background: $dark-beige;
+        color: $blue;
+    }
+}
