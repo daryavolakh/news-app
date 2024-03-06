@@ -22,6 +22,9 @@ export interface Article {
   lead_paragraph?: string,
   author?: string,
   urlToImage?: string,
+  url?: string,
+  uri?: string,
+  webUrl?: string,
 }
 
 export interface FormDate {

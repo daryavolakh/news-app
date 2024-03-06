@@ -28,7 +28,13 @@ export default function SearchResults ({ results } : SearchResultsProps) {
                 <p className="SearchResults__article-date">{formatDate(result.pub_date)}</p>
               )}
               {(result.description || result.lead_paragraph) && (<p className="SearchResults__article-descr">{result.description || result.lead_paragraph}</p>)}
-              {result?.author && (<p className="NewsFeed__article-author">By: {result.author}</p>)}
+              {result?.author && (<p className="SearchResults__article-author">By: {result.author}</p>)}
+              <a
+                href={result.url || result.uri || result.webUrl}
+                target="_blank"
+                className="SearchResults__article-link">
+                Read on the main resource
+              </a>
             </div>
           </li>
         ))

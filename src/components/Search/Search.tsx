@@ -62,8 +62,6 @@ export default function Search() {
     }
 
     handleSearch();
-
-    console.log(filters.date);
   }, [keyword, filters]);
 
   return (

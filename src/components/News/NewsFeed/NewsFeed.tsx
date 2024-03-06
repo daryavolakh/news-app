@@ -23,7 +23,7 @@ export default function NewsFeed ({articles, loading, error} : NewsFeedProps) {
           <li className="NewsFeed__article" key={uuidv4()}>
              {article.urlToImage && (
               <div className="NewsFeed__article-image-wrap">
-                <img src={article.urlToImage} alt="`Image for ${article.title}`" className="NewsFeed__article-image" />
+                <img src={article.urlToImage} alt={`Image for ${article.title}`} className="NewsFeed__article-image" />
               </div>
             )}
             <div className="NewsFeed__article-info">
@@ -39,6 +39,12 @@ export default function NewsFeed ({articles, loading, error} : NewsFeedProps) {
               )}
               {(article.description || article.lead_paragraph) && (<p className="NewsFeed__article-descr">{article.description || article.lead_paragraph}</p>)}
               {article?.author && (<p className="NewsFeed__article-author">By: {article.author}</p>)}
+              <a
+                href={article.url || article.uri || article.webUrl}
+                target="_blank"
+                className="NewsFeed__article-link">
+                Read on the main resource
+              </a>
             </div>
           </li>
         ))}

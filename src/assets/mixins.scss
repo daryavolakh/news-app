@@ -54,3 +54,18 @@
         padding: 5px;
     }
 }
+
+@mixin link {
+    color: $pink;
+    text-decoration: unset;
+    background: $beige;
+    border-radius: 10px;
+    border: $border;
+    padding: 5px 10px;
+    transition: 0.1s;
+
+    &:hover {
+        background: $dark-beige;
+        color: $blue;
+    }
+}
